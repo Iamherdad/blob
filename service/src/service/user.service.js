@@ -8,6 +8,7 @@ class UserService {
   }
 
   async create(username, password, avatar) {
+   
     const statement =
       "INSERT INTO `user` (username,password,avatar) VALUES(?,?,?);";
     const [result] = await dbConnection.execute(statement, [

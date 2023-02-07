@@ -9,6 +9,7 @@ class UserMiddleWare {
     }
 
     const findRes = await findUser(username);
+   
     if (findRes.length) {
       return ctx.app.emit("error", "USER_EXIST", ctx);
     }

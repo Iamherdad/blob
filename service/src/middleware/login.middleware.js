@@ -5,6 +5,7 @@ const md5 = require("../utils/handle-md5");
 class LoginMiddleWare {
   async verifyUser(ctx, next) {
     const { username, password } = ctx.request.body;
+    console.log(ctx.request.body)
     if (!removeSpace(username) && !removeSpace(password)) {
       return ctx.app.emit("error", "DATA_NULL", ctx);
     }

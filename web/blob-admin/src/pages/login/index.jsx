@@ -1,9 +1,12 @@
 import React from "react";
 import { Button, Checkbox, Form, Input } from "antd";
+import { login } from "../../service/api/login";
 import "./index.less";
 export default function Login() {
-  const onFinish = (values) => {
-    console.log("Success:", values);
+  const onFinish = async (values) => {
+    const { username, password } = values;
+    const result = await login({ username, password });
+    console.log(result);
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -34,6 +37,14 @@ export default function Login() {
                 required: true,
                 message: "请输入用户名!",
               },
+              {
+                min: 3,
+                message: "用户名不能少于三个字符",
+              },
+              {
+                max: 8,
+                message: "用户名不能大于八个字符",
+              },
             ]}
           >
             <Input />
@@ -47,6 +58,14 @@ export default function Login() {
                 required: true,
                 message: "请输入密码!",
               },
+              {
+                min: 6,
+                message: "密码不能小于6个字符",
+              },
+              {
+                max: 20,
+                message: "密码不能大于20个字符",
+              },
             ]}
           >
             <Input.Password />
@@ -59,7 +78,7 @@ export default function Login() {
             }}
           >
             <Button type="primary" htmlType="submit">
-              Submit
+              登陆
             </Button>
           </Form.Item>
         </Form>
