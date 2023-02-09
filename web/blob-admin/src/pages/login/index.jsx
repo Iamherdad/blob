@@ -1,12 +1,16 @@
 import React from "react";
 import { Button, Checkbox, Form, Input } from "antd";
 import { login } from "../../service/api/login";
+import { router } from "../../router";
+import { setToken } from "../../config/token";
 import "./index.less";
 export default function Login() {
   const onFinish = async (values) => {
     const { username, password } = values;
     const result = await login({ username, password });
-    console.log(result);
+    setToken(result.data.token);
+
+    router.navigate("/");
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);

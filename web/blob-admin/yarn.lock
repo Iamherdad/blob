@@ -229,6 +229,13 @@
   dependencies:
     regenerator-runtime "^0.13.11"
 
+"@babel/runtime@^7.7.6":
+  version "7.20.13"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.20.13.tgz#7055ab8a7cff2b8f6058bf6ae45ff84ad2aded4b"
+  integrity sha512-gt3PKXs0DBoL9xCvOIIZ2NEqAGZqHjAnmVbfQtB620V0uReIQutpel14KcneZuer7UioY8ALKZ7iocavvzTNFA==
+  dependencies:
+    regenerator-runtime "^0.13.11"
+
 "@babel/template@^7.18.10", "@babel/template@^7.20.7":
   version "7.20.7"
   resolved "https://registry.npmmirror.com/@babel/template/-/template-7.20.7.tgz#a15090c2839a83b02aa996c0b4994005841fd5a8"
@@ -800,6 +807,13 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
+history@^5.3.0:
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/history/-/history-5.3.0.tgz#1548abaa245ba47992f063a0783db91ef201c73b"
+  integrity sha512-ZqaKwjjrAYUYfLG+htGaIIZ4nioX2L70ZUMIFysS3xvBsSG4x/n1V6TXV3N8ZYNuFGlDirFg32T7B6WOUPDYcQ==
+  dependencies:
+    "@babel/runtime" "^7.7.6"
+
 iconv-lite@^0.6.3:
   version "0.6.3"
   resolved "https://registry.npmmirror.com/iconv-lite/-/iconv-lite-0.6.3.tgz#a52f80bf38da1952eb5c681790719871a1a72501"
@@ -942,6 +956,27 @@ normalize.css@^8.0.1:
   version "8.0.1"
   resolved "https://registry.npmmirror.com/normalize.css/-/normalize.css-8.0.1.tgz#9b98a208738b9cc2634caacbc42d131c97487bf3"
   integrity sha512-qizSNPO93t1YUuUhP22btGOo3chcvDFqFaj2TRybP0DMxkHOCTYwp3n34fel4a31ORXy4m1Xq0Gyqpb5m33qIg==
+
+oh-router-react@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/oh-router-react/-/oh-router-react-0.0.9.tgz#a3c6f296e284f7e745937e201ffe7e49eb93216a"
+  integrity sha512-owQnRBpDEKPUs19VwEM7ct50inwCScBjm2CrRJXsOdBjWvlFwWoFE/fLYaOUsRObGMicyuKaW+BBFU5d4JPqdg==
+  dependencies:
+    history "^5.3.0"
+    oh-router-shared "^0.1.0"
+
+oh-router-shared@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/oh-router-shared/-/oh-router-shared-0.1.0.tgz#6023991d5dc521f1f5179822a2972e3439ad50d7"
+  integrity sha512-9egqM7FUmadm3X/PvVpjgiSqMUryRqPnzI/IDP9wFHsV97k9YLrQ2PBAv7u3hGPd4aoSPIGEKUcFzCiOAGXMYw==
+
+oh-router@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/oh-router/-/oh-router-0.3.0.tgz#18b9b802c611fe056c2cc3fc342bd5bbad81de7f"
+  integrity sha512-nNtliQjaO7BNdlV+OZvo1fYzgs5xJbDKXOqPCWLO3Bar9GyUj9TjwpkV1/pbQTmAyuM/tzGMGt3Q3uh5w1VDXg==
+  dependencies:
+    history "^5.3.0"
+    oh-router-shared "^0.1.0"
 
 parse-node-version@^1.0.1:
   version "1.0.1"

@@ -13,7 +13,7 @@ class UserController {
       code: 1000,
       msg: "登录成功",
       data: {
-        userinfo: ctx.user[0],
+        userinfo: ctx.user[0 ],
         token,
       },
     };
