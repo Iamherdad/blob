@@ -1,12 +1,86 @@
-.nav{
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 70px;
-    backdrop-filter: blur(10px); 
-    box-sizing: border-box;
-    padding-top: 2px;
-    background:linear-gradient(120deg, rgba(247,135,54,0.208) 0%, rgba(54,125,247,0.208) 100%)
-    
+.nav {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 70px;
+  backdrop-filter: blur(10px);
+  box-sizing: border-box;
+  padding-top: 2px;
+  background: linear-gradient(
+    120deg,
+    rgba(247, 135, 54, 0.208) 0%,
+    rgba(54, 125, 247, 0.208) 100%
+  );
+  transition: all 0.1s linear;
+  .containar {
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
+    z-index: 999999999;
+    display: flex;
+    justify-content: space-between;
+    .left {
+      height: 100%;
+      line-height: 70px;
+      flex: 1;
+      font-weight: 700;
+      font-size: 20px;
+    }
+    .right {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .right > li {
+      display: inline-block;
+      margin: 5px -3px;
+      padding: 10px 15px;
+      position: relative;
+
+      text-align: center;
+      cursor: pointer;
+    }
+    .right > li:before {
+      content: "";
+      position: absolute;
+      bottom: 0px;
+      width: 0;
+      left: 50%;
+      border-bottom: 2px solid #4989bd;
+      transition: 0.2s all linear;
+    }
+    .right > li:hover::before {
+      left: 0;
+      width: 100%;
+    }
+    .right > li:hover + li::before {
+      left: 0;
+    }
+    // .active {
+    //   color: aqua;
+    // }
+    .active::after {
+      content: "";
+      position: absolute;
+      bottom: 0px;
+      left: 0;
+      width: 100%;
+      border-bottom: 2px solid #4989bd;
+      transition: 0.2s all linear;
+    }
+  }
+}
+.scrollactive {
+  height: 50px;
+  // transition: all 0.1s linear;
+  .containar > .left {
+    height: 100%;
+    line-height: 50px;
+    flex: 1;
+    font-weight: 700;
+    font-size: 20px;
+    // transform: scale(0.8);
+  }
 }
