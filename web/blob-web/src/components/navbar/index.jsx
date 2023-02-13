@@ -1,12 +1,12 @@
 import classNames from "classnames";
 import React from "react";
-import "./index.module..less";
+import styles from "./index.module.less";
 export default function Navbar(props) {
   const { className } = props;
-  const classname = classNames(className, "nav");
+  const classname = classNames(className, styles.nav);
   return (
     <div className={classname}>
-      <div className="containar"></div>
+      <div className={styles.containar}></div>
     </div>
   );
 }
