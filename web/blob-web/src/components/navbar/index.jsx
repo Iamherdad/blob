@@ -12,7 +12,7 @@ export default function Navbar(props) {
       link: "#",
     },
     {
-      title: "作者",
+      title: "档案",
       link: "#",
     },
     {
