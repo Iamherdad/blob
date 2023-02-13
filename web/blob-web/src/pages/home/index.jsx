@@ -9,6 +9,7 @@ export default function Home() {
   const percent = useMemo(() => {
     return (scrollTop / (scrollHeight - clientHeight)) * 100;
   }, [scrollTop, clientHeight, scrollHeight]);
+
   return (
     <div className="home">
       <Progress percent={percent} color="green" />
