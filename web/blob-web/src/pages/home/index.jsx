@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import { Outlet } from "react-router-dom";
 import Navbar from "../../components/navbar";
 import Progress from "../../components/Progress";
 import { useScroll } from "../../hooks";
@@ -16,7 +17,8 @@ export default function Home() {
       <Progress percent={percent} color="green" />
       <Navbar />
       <Welcome />
-      <ArticleList />
+      <Outlet />
+      {/* <ArticleList /> */}
     </div>
   );
 }
