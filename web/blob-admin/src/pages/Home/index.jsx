@@ -6,13 +6,19 @@ import {
   VideoCameraOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, theme } from "antd";
+import { Outlet, useNavigate } from "oh-router-react";
 import React, { useState } from "react";
+
 const { Header, Sider, Content } = Layout;
 const Home = () => {
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+  const navigate = useNavigate();
+  const menuItemClick = ({ key }) => {
+    navigate(key);
+  };
   return (
     <Layout>
       <Sider trigger={null} collapsible collapsed={collapsed}>
@@ -20,23 +26,24 @@ const Home = () => {
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={["1"]}
+          defaultSelectedKeys={["createArticle"]}
+          onClick={menuItemClick}
           items={[
             {
-              key: "1",
+              key: "createArticle",
               icon: <UserOutlined />,
-              label: "nav 1",
+              label: "创建文章",
             },
-            {
-              key: "2",
-              icon: <VideoCameraOutlined />,
-              label: "nav 2",
-            },
-            {
-              key: "3",
-              icon: <UploadOutlined />,
-              label: "nav 3",
-            },
+            // {
+            //   key: "2",
+            //   icon: <VideoCameraOutlined />,
+            //   label: "nav 2",
+            // },
+            // {
+            //   key: "3",
+            //   icon: <UploadOutlined />,
+            //   label: "nav 3",
+            // },
           ]}
         />
       </Sider>
@@ -63,7 +70,7 @@ const Home = () => {
             background: colorBgContainer,
           }}
         >
-          Content
+          <Outlet />
         </Content>
       </Layout>
     </Layout>

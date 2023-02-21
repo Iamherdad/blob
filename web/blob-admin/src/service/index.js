@@ -13,7 +13,7 @@ request.interceptors.request.use((config)=>{
 
 
 request.interceptors.response.use((config)=>{
-    if(resizeBy.data.code==-1){
+    if(config.data.code==-1){
         throw Error(res.data.message)
     }
     return  config.data
