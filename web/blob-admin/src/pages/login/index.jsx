@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Checkbox, Form, Input } from "antd";
+import { Button, Checkbox, Form, Input, message } from "antd";
 import { login } from "../../service/api/login";
 import { router } from "../../router";
 import { setToken } from "../../config/token";
@@ -8,6 +8,18 @@ export default function Login() {
   const onFinish = async (values) => {
     const { username, password } = values;
     const result = await login({ username, password });
+    console.log(result, "result");
+    if (result.code != 1000) {
+      message.open({
+        type: "error",
+        content: result.msg,
+      });
+      return;
+    }
+    message.open({
+      type: "success",
+      content: result.msg,
+    });
     setToken(result.data.token);
 
     router.navigate("/");

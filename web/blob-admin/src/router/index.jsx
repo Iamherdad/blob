@@ -14,6 +14,10 @@ export const routes = [
     element: <Home />,
     children: [
       {
+        path: "",
+        redirect: "createArticle",
+      },
+      {
         path: "createArticle",
         element: <CreateArticle />,
       },
