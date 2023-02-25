@@ -23,6 +23,9 @@ app.on("error", (errType, ctx) => {
       message.code = "-1004";
       message.msg = "密码错误";
       break;
+    case "NOT_AUTH":
+      message.code="-1005";
+      message.msg="用户信息校验失败"  
   }
 
   return (ctx.body = message);

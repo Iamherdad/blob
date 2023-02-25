@@ -1,6 +1,8 @@
 const { removeSpace } = require("../utils/index");
 const { findUser } = require("../service/user.service");
 const md5 = require("../utils/handle-md5");
+const jwt = require('jsonwebtoken')
+const  { PUB_KEY } = require ("../config/secret") ;
 
 class LoginMiddleWare {
   async verifyUser(ctx, next) {
@@ -22,6 +24,23 @@ class LoginMiddleWare {
     ctx.user = findRes;
     delete findRes.password;
     await next();
+  }
+  async auth(ctx,next){
+    const authorization = ctx.headers.authorization
+    if(!authorization){
+      return  ctx.app.emit('error','NOT_AUTH',ctx)
+   }
+   const token = authorization.replace('Bearer ', '')
+ 
+   try{
+       // const verifyRes = jwt.verify(token,PUBLICK_KEY,{algorithms:'RS256'})
+       const verifyRes = jwt.verify(token,PUB_KEY)
+       ctx.user=verifyRes
+      await next()
+   }catch(err){
+       console.log(err)
+       return  ctx.app.emit('error','NOT_AUTH',ctx)
+   }
   }
 }
 
