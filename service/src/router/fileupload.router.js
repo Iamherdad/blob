@@ -1,8 +1,10 @@
 const Router = require("@koa/router");
 const { auth } = require("../middleware/login.middleware");
 const qiniu = require('qiniu')
-const multer = require('@koa/multer')  
 const fs  =require('fs')
+const path = require('path')
+const {fileUpload} = require('../middleware/upload.middleware')
+
 var accessKey = '1mWRcX8aukr70JbGuuVBEdYMFAT6g_hvGbaNEcXq';
 var secretKey = 'IYXfrgdXSK60b93ancT9LHhopjQ8dsH7PP8ASNOF';
 var mac = new qiniu.auth.digest.Mac(accessKey, secretKey);
@@ -20,7 +22,11 @@ config.zone = qiniu.zone.Zone_z2;
 var formUploader = new qiniu.form_up.FormUploader(config); 
 var putExtra = new qiniu.form_up.PutExtra()
 
-
+const limits = {
+  fields: 10,//非文件字段的数量
+  fileSize: 500 * 1024,//文件大小 单位 b
+  files: 1//文件数量
+}
 
 
 
@@ -28,16 +34,20 @@ const userRouter = new Router({
   prefix: "/fileupload",
 });
 
-userRouter.post("/", auth,multer().single('file'),(ctx,next)=>{
-  console.log(ctx.file)
-  const buffer = Buffer.from(ctx.file.buffer)
+userRouter.post("/", fileUpload,async (ctx,next)=>{
+  console.log(ctx.file,'file')
+  const {file} = ctx
+
+  
+  
+
  
  
-//     formUploader.putFile(uploadToken, null,file, putExtra, function (respErr, respBody, respInfo) {
-//    console.log(respErr,'err')
-//    console.log(respBody,'body')
-//    console.log(respInfo,'info')
-// });
+    formUploader.putFile(uploadToken, null,file.path, putExtra, function (respErr, respBody, respInfo) {
+   console.log(respErr,'err')
+   console.log(respBody,'body')
+   console.log(respInfo,'info')
+});
 
 
 ctx.body="123"

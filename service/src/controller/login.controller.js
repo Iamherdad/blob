@@ -4,7 +4,8 @@ class UserController {
   async login(ctx, next) {
 
     const { username, id } = ctx.user;
-    const token = jwt.sign({ username, id }, PRI_KEY, {
+    
+    const token = jwt.sign({ username, id  }, PRI_KEY, {
       expiresIn: "4h",
       algorithm: "RS256",
     });

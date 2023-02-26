@@ -25,7 +25,12 @@ app.on("error", (errType, ctx) => {
       break;
     case "NOT_AUTH":
       message.code="-1005";
-      message.msg="用户信息校验失败"  
+      message.msg="用户信息校验失败"  ;
+      break;
+     case "FTOO_MANY_FILES":
+      message.code="-1006";
+      message.msg="超出最大文件上穿限制"  ;
+      break
   }
 
   return (ctx.body = message);

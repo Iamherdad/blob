@@ -7,7 +7,7 @@ const  { PUB_KEY } = require ("../config/secret") ;
 class LoginMiddleWare {
   async verifyUser(ctx, next) {
     const { username, password } = ctx.request.body;
-    console.log(ctx.request.body)
+   
     if (!removeSpace(username) && !removeSpace(password)) {
       return ctx.app.emit("error", "DATA_NULL", ctx);
     }
@@ -21,7 +21,8 @@ class LoginMiddleWare {
     if (md5(password) !== dbPwd) {
       return ctx.app.emit("error", "USER_PWD_ERROR", ctx);
     }
-    ctx.user = findRes;
+   
+    ctx.user = findRes[0];
     delete findRes.password;
     await next();
   }
@@ -33,8 +34,9 @@ class LoginMiddleWare {
    const token = authorization.replace('Bearer ', '')
  
    try{
-       // const verifyRes = jwt.verify(token,PUBLICK_KEY,{algorithms:'RS256'})
+       
        const verifyRes = jwt.verify(token,PUB_KEY)
+  
        ctx.user=verifyRes
       await next()
    }catch(err){
