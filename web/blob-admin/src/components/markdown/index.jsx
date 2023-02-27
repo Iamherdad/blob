@@ -35,7 +35,7 @@ const Bytemd = (props) => {
           const res = await uploadImg(fromData);
           console.log(res, "res");
           if (res && res.code === 1000) {
-            imgUrl = res.data; // 这里是上传成功后，服务端返回的图片地址
+            imgUrl = res.data; // 上传成功后，服务端返回的图片地址
           } else {
             notification.error({
               message: "图片上传失败",
