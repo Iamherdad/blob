@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Checkbox, Form, Input, message } from "antd";
 import { login } from "../../service/api/login";
 import { router } from "../../router";
-import { setToken } from "../../config/token";
+import { setToken, setRefreshToken } from "../../config/token";
 import "./index.less";
 export default function Login() {
   const onFinish = async (values) => {
@@ -21,8 +21,8 @@ export default function Login() {
       content: result.msg,
     });
     setToken(result.data.token);
-
-    router.navigate("/");
+    setRefreshToken(result.data.refreshToken);
+    router.navigate("/home/createArticle");
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);

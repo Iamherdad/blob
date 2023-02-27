@@ -24,13 +24,26 @@ app.on("error", (errType, ctx) => {
       message.msg = "密码错误";
       break;
     case "NOT_AUTH":
-      message.code="-1005";
-      message.msg="用户信息校验失败"  ;
+      message.code = "-1005";
+      message.msg = "用户信息校验失败";
+      ctx.status = 401;
       break;
-     case "FTOO_MANY_FILES":
-      message.code="-1006";
-      message.msg="超出最大文件上穿限制"  ;
-      break
+    case "NOT_FILE":
+      message.code = "-1006";
+      message.msg = "文件不能为空";
+      break;
+    case "FTOO_MANY_FILES":
+      message.code = "-1007";
+      message.msg = "超出最大文件上穿限制";
+      break;
+    case "FILE_UPLOAD_ERROR":
+      message.code = "-1008";
+      message.msg = "上传失败请稍后再试";
+      break;
+    case "REFRESH_ERROR":
+      message.code = "-1007";
+      message.msg = "token刷新失败";
+      break;
   }
 
   return (ctx.body = message);

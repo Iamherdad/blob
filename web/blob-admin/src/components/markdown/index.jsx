@@ -7,7 +7,8 @@ import "highlight.js/styles/monokai-sublime.css"; // 代码高亮的主题样式
 import frontmatter from "@bytemd/plugin-frontmatter"; // 解析前题
 import mediumZoom from "@bytemd/plugin-medium-zoom"; // 缩放图片
 import gemoji from "@bytemd/plugin-gemoji";
-// import { uploadImg } from "@/services/upload";
+
+import { uploadImg } from "../../service/api/fileUpload";
 import { notification } from "antd";
 import "bytemd/dist/index.min.css"; // bytemd基础样式必须引入！！！
 import "juejin-markdown-themes/dist/juejin.min.css"; // 掘金同款样式
@@ -30,10 +31,10 @@ const Bytemd = (props) => {
         uploadImages={async (files) => {
           let imgUrl = "";
           let fromData = new FormData();
-          fromData.append("uploadImg", files[0]);
-          console.log(files, "files");
-          //   const res = await uploadImg(fromData);
-          if (res && res.code === 200) {
+          fromData.append("file", files[0]);
+          const res = await uploadImg(fromData);
+          console.log(res, "res");
+          if (res && res.code === 1000) {
             imgUrl = res.data; // 这里是上传成功后，服务端返回的图片地址
           } else {
             notification.error({
