@@ -28,6 +28,7 @@ app.on("error", (errType, ctx) => {
       message.msg = "用户信息校验失败";
       ctx.status = 401;
       break;
+    
     case "NOT_FILE":
       message.code = "-1006";
       message.msg = "文件不能为空";
@@ -45,6 +46,11 @@ app.on("error", (errType, ctx) => {
       message.msg = "token刷新失败";
       ctx.status = 402;
       break;
+      case "INVALID_TOKEN" :
+        message.code="-1008";
+        message.msg="无效请求",
+        ctx.status=402;
+        break 
   }
 
   return (ctx.body = message);

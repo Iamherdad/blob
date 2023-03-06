@@ -12,18 +12,19 @@ userRouter.post("/", verifyUser, login);
 
 userRouter.post("/refreshToken", (ctx, next) => {
   const { refreshToken } = ctx.request.body;
+  
   const authorization = ctx.headers.authorization;
 
   if (!authorization) {
-    return ctx.app.emit("error", "NOT_AUTH", ctx);
+    return ctx.app.emit("error", "INVALID_TOKEN", ctx);
   }
 
   const token = authorization.replace("Bearer ", "");
 
-  if (!token || !refreshToken) {
-    return ctx.app.emit("error", "NOT_AUTH", ctx);
+  if ( !refreshToken) {
+    return ctx.app.emit("error", "INVALID_TOKEN", ctx);
   }
-
+  console.log(token,'token')
   try {
     const verifyRes = jwt.verify(refreshToken, PUB_KEY);
     console.log(verifyRes, "token");

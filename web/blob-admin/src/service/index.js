@@ -1,3 +1,4 @@
+import { message } from "antd";
 import axios from "axios";
 import {
   getToken,
@@ -38,9 +39,10 @@ request.interceptors.response.use(
         console.log(err.config, "config");
         return request(err.config);
       case 402:
+        message.error('登陆过期，重新登陆')
         removeToken();
         removeRefreshToken();
-        router.navigate("/");
+        router.navigate("/login");
         break;
       default:
         break;
