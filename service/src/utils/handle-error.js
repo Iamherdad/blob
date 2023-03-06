@@ -43,6 +43,7 @@ app.on("error", (errType, ctx) => {
     case "REFRESH_ERROR":
       message.code = "-1007";
       message.msg = "token刷新失败";
+      ctx.status = 402;
       break;
   }
 

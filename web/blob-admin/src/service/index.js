@@ -7,6 +7,7 @@ import {
   setToken,
   setRefreshToken,
 } from "../config/token";
+import { router } from "../router";
 import { refreshToken } from "./api/login";
 const request = axios.create({
   baseURL: "http://localhost:8000",
@@ -25,17 +26,24 @@ request.interceptors.response.use(
   },
   async (err) => {
     console.log(err, "err");
-    if (err.response?.status === 401) {
-      const rToken = getRefreshToken();
+    switch (err.response?.status) {
+      case 401:
+        const rToken = getRefreshToken();
 
-      const refreshRes = await refreshToken(rToken);
-      removeToken();
-      removeRefreshToken();
-      setToken(refreshRes.data.token);
-      setRefreshToken(refreshRes.data.refreshToken);
-      console.log(err.config, "config");
-      return request(err.config);
-      //身份验证失败或过期，重新登陆
+        const refreshRes = await refreshToken(rToken);
+        removeToken();
+        removeRefreshToken();
+        setToken(refreshRes.data.token);
+        setRefreshToken(refreshRes.data.refreshToken);
+        console.log(err.config, "config");
+        return request(err.config);
+      case 402:
+        removeToken();
+        removeRefreshToken();
+        router.navigate("/");
+        break;
+      default:
+        break;
     }
   }
 );

@@ -5,18 +5,20 @@ import Bytemd from "../../components/markdown";
 import { PlusOutlined } from "@ant-design/icons";
 import styles from "./index.module.less";
 import TextArea from "antd/es/input/TextArea";
+import { uploadImg } from "../../service/api/fileUpload";
 
 export default function CreateArticle() {
   const [value, setValue] = useState("");
-  const [fileList, setFileList] = useState([
-    // {
-    //   uid: "-1",
-    //   name: "image.png",
-    //   status: "done",
-    //   url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-    // },
-  ]);
-  const uploadChange = ({ fileList: newFileList }) => {
+  const [fileList, setFileList] = useState([]);
+
+  const [form] = Form.useForm();
+  const uploadChange = ({ file, fileList: newFileList }) => {
+    if (file.status == "removed") {
+      console.log(111);
+      form.setFieldValue("cover", undefined);
+    }
+    console.log(newFileList, "file");
+
     setFileList(newFileList);
   };
 
@@ -24,7 +26,25 @@ export default function CreateArticle() {
   const onFinishFailed = () => {};
   const onChange = () => {};
   const onSearch = () => {};
+  const handleClick = async () => {
+    try {
+      const vail = await form.validateFields();
+      console.log(vail, "1");
+    } catch (err) {
+      console.log(err, "err");
+      console.log(form.getFieldValue("cover"), "val");
+    }
+  };
+  const handleUpload = async ({ file, onSuccess }) => {
+    let fromData = new FormData();
+    fromData.append("file", file);
 
+    const result = await uploadImg(fromData);
+    if (result.code) {
+      onSuccess(result.data);
+    }
+    console.log(result, "result");
+  };
   const uploadButton = (
     <div>
       <PlusOutlined />
@@ -69,6 +89,7 @@ export default function CreateArticle() {
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
                     autoComplete="off"
+                    form={form}
                   >
                     <FormItem
                       label="选择标签"
@@ -118,11 +139,12 @@ export default function CreateArticle() {
                       ]}
                     >
                       <Upload
-                        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                        customRequest={handleUpload}
                         listType="picture-card"
-                        fileList={fileList}
                         onChange={uploadChange}
                         maxCount={1}
+                        fileList={fileList}
+                        headers={{ ContentType: "multipart / form - data" }}
                       >
                         {fileList.length >= 1 ? null : uploadButton}
                       </Upload>
@@ -139,17 +161,10 @@ export default function CreateArticle() {
                     >
                       <TextArea></TextArea>
                     </FormItem>
-                    <Form.Item
-                      wrapperCol={{
-                        offset: 8,
-                        span: 16,
-                      }}
-                    >
-                      <Button type="primary" htmlType="submit">
-                        Submit
-                      </Button>
-                    </Form.Item>
                   </Form>
+                  <Button type="primary" onClick={handleClick}>
+                    Submit
+                  </Button>
                 </div>
               </div>
             }
